@@ -59,7 +59,6 @@ public class NewPriceService {
         toXml.setNewAmount(calc.getNewAmount());
         toXml.setNewPrice(calc.getNewPrice());
         
-        //jaxb.convertObjectToXml(toXml, filepathTo);
         list.add(toXml);
         }
         String result = list.stream().map(Object::toString)
