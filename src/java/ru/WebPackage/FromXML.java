@@ -3,8 +3,6 @@ import javax.xml.bind.annotation.*;
 import java.math.BigInteger;
 
 @XmlRootElement(name = "Line")
-//@XmlType(propOrder = {"lineNumber", "organizationName", "organizationCode", "docNumber", "itemName", "price", "quantity"})
-
 public class FromXML {    
     private int LineNumber;
     private String OrganizationName;

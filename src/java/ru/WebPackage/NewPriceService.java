@@ -22,10 +22,8 @@ public class NewPriceService {
         }
     }
     
-//    test
-    
     @WebMethod(operationName = "getNewCost")
-    public String getNewCost (String text) { 
+    public String getNewCost (String text) {
         List<ToXML> list = new ArrayList();       
         String[] str = text.split("\\n\\n+");
         
