@@ -28,7 +28,6 @@ public class NewPriceService {
         List<ToXML> list = new ArrayList();       
         String[] str = text.split("\\n\\n+");
         
-        
         JaxbWorker jaxb = new JaxbWorker();
         FromXML unmarshXML;
         ToXML toXml;
