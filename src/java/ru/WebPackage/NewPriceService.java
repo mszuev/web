@@ -22,16 +22,17 @@ public class NewPriceService {
         }
     }
     
+    
     @WebMethod(operationName = "getNewCost")
     public String getNewCost (String text) {
         List<ToXML> list = new ArrayList();       
         String[] str = text.split("\\n\\n+");
         
+        
         JaxbWorker jaxb = new JaxbWorker();
         FromXML unmarshXML;
         ToXML toXml;
         Calculate calc;
-        
         
         for (int i = 0; i < str.length; i++) {                               
         unmarshXML = jaxb.fromXmlToObject(str[i]);
