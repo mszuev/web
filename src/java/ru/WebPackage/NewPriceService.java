@@ -13,13 +13,13 @@ import javax.jws.WebMethod;
 public class NewPriceService {        
         
     public NewPriceService() throws IOException{
-        InputStream input = getClass().getClassLoader().getResourceAsStream("../Config.properties");
+        try(InputStream input = getClass().getClassLoader().getResourceAsStream("../Config.properties")) {
         Properties property = new Properties();
         property.load(input);
         ConfigReader.setMaxPrice(new BigInteger(property.getProperty("maxPrice")));
         ConfigReader.setOrganizationCodeList(property.getProperty("organizationCode"));
         ConfigReader.setMarkup(Integer.parseInt(property.getProperty("markup")));
-        input.close();
+        }
     }
     
     @WebMethod(operationName = "getNewCost")
@@ -31,6 +31,7 @@ public class NewPriceService {
         FromXML unmarshXML;
         ToXML toXml;
         Calculate calc;
+        
         
         for (int i = 0; i < str.length; i++) {                               
         unmarshXML = jaxb.fromXmlToObject(str[i]);
