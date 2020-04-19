@@ -24,44 +24,33 @@ public class NewPriceService {
     
     @WebMethod(operationName = "getNewCost")
     public String getNewCost (String text) {
-        List<ToXML> list = new ArrayList();       
-        String[] str = text.split("\\n\\n+");
         
         JaxbWorker jaxb = new JaxbWorker();
-        FromXML unmarshXML;
-        ToXML toXml;
-        Calculate calc;
-        
-        for (int i = 0; i < str.length; i++) {                               
-            unmarshXML = jaxb.fromXmlToObject(str[i]);
-            toXml = new ToXML();
-            calc = new Calculate();
+        FromXML unmarshXML = jaxb.fromXmlToObject(text);
+        ToXML toXml = new ToXML();
+        Calculate calc = new Calculate();
 
-            calc.setQuantity(unmarshXML.getQuantity());
-            calc.setItemName(unmarshXML.getItemName());
-            calc.setPrice(unmarshXML.getPrice());
-            calc.setDocNumber(unmarshXML.getDocNumber());
-            calc.setOrganizationName(unmarshXML.getOrganizationName());
-            calc.setOrganizationCodeInXML(unmarshXML.getOrganizationCode());
+        calc.setQuantity(unmarshXML.getQuantity());
+        calc.setItemName(unmarshXML.getItemName());
+        calc.setPrice(unmarshXML.getPrice());
+        calc.setDocNumber(unmarshXML.getDocNumber());
+        calc.setOrganizationName(unmarshXML.getOrganizationName());
+        calc.setOrganizationCodeInXML(unmarshXML.getOrganizationCode());
 
-            toXml.setLineNumber(unmarshXML.getLineNumber());
-            toXml.setOrganizationName(unmarshXML.getOrganizationName());
-            toXml.setOrganizationCode(unmarshXML.getOrganizationCode());
-            toXml.setDocNumber(unmarshXML.getDocNumber());
-            toXml.setItemName(unmarshXML.getItemName());
-            toXml.setPrice(unmarshXML.getPrice());
-            toXml.setQuantity(unmarshXML.getQuantity());
-            toXml.setNewPrice(calc.getNewPrice());
-            toXml.setNewAmount(calc.getNewAmount());
-            calc.check();
-            toXml.setErrorMessage(calc.getErrorMessage());
-            toXml.setNewAmount(calc.getNewAmount());
-            toXml.setNewPrice(calc.getNewPrice());
+        toXml.setLineNumber(unmarshXML.getLineNumber());
+        toXml.setOrganizationName(unmarshXML.getOrganizationName());
+        toXml.setOrganizationCode(unmarshXML.getOrganizationCode());
+        toXml.setDocNumber(unmarshXML.getDocNumber());
+        toXml.setItemName(unmarshXML.getItemName());
+        toXml.setPrice(unmarshXML.getPrice());
+        toXml.setQuantity(unmarshXML.getQuantity());
+        toXml.setNewPrice(calc.getNewPrice());
+        toXml.setNewAmount(calc.getNewAmount());
+        calc.check();
+        toXml.setErrorMessage(calc.getErrorMessage());
+        toXml.setNewAmount(calc.getNewAmount());
+        toXml.setNewPrice(calc.getNewPrice());
 
-            list.add(toXml);
-        }
-        String result = list.stream().map(Object::toString)
-                        .collect(Collectors.joining("\n\n"));
-        return result;
+        return toXml.toString();
     }  
 }
