@@ -23,19 +23,17 @@ public class Calculate {
     public void check(){
         String str[] = organizationCodeList.split("\\s*,\\s*");
         if(newAmount.compareTo(maxPrice) == 1){
-            errorMessage = "Стоимость товара " + itemName + ", равная " + newAmount + 
-                    ", превышает максимально разрешенную стоимость " + maxPrice + ";";
+            errorMessage = String.format("Стоимость товара %s, равная %d, превышает максимально разрешенную стоимость %d;", itemName, newAmount, maxPrice);
             sb.append(errorMessage);
             isOkey = false;
         }
         if(!Arrays.asList(str).contains(organizationCodeInXML)){
-            errorMessage = "Организация " + organizationName + " отсутствует в списке партнеров" + ";";
+            errorMessage = String.format("Организация %s отсутствует в списке партнеров;", organizationName);
             sb.append(errorMessage);
             isOkey = false;
         }
         if(!docNumber.substring(0,4).toLowerCase().contains("dcmt")){
-            errorMessage = "Неверный номер документа – " + docNumber + 
-                    ", наименование организации - " + organizationName + ";";
+            errorMessage = String.format("Неверный номер документа – %s, наименование организации - %s;", docNumber, organizationName);
             sb.append(errorMessage);
             isOkey = false;
         }

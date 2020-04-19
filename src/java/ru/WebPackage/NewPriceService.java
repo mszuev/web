@@ -2,10 +2,7 @@ package ru.WebPackage;
 
 import java.io.*;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 

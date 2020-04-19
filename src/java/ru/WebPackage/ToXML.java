@@ -1,9 +1,6 @@
 package ru.WebPackage;
-import javax.xml.bind.annotation.*;
-import java.math.BigInteger;
 
-@XmlRootElement(name = "Line")
-@XmlType(propOrder = {"lineNumber", "organizationName", "organizationCode", "docNumber", "itemName", "price", "quantity", "newPrice", "newAmount", "errorMessage"})
+import java.math.BigInteger;
 
 public class ToXML {       
     
