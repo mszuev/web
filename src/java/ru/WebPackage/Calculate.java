@@ -1,7 +1,10 @@
 package ru.WebPackage;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Calculate {
     private BigInteger maxPrice = ConfigReader.getMaxPrice();
@@ -16,28 +19,27 @@ public class Calculate {
     private String docNumber;
     private String organizationName;
     private String organizationCodeInXML;
-    private String errorMessage;  
-    StringBuilder sb = new StringBuilder();
-    boolean isOkey = true;
+    private String errorMessage;
+    private List<String> errorList = new ArrayList<>();
+    private boolean isOkey = true;
     
     public void check(){
         String str[] = organizationCodeList.split("\\s*,\\s*");
         if(newAmount.compareTo(maxPrice) == 1){
-            errorMessage = String.format("Стоимость товара %s, равная %d, превышает максимально разрешенную стоимость %d;", itemName, newAmount, maxPrice);
-            sb.append(errorMessage);
+            errorMessage = String.format("Стоимость товара %s, равная %d, превышает максимально разрешенную стоимость %d", itemName, newAmount, maxPrice);
+            errorList.add(errorMessage);
             isOkey = false;
         }
         if(!Arrays.asList(str).contains(organizationCodeInXML)){
-            errorMessage = String.format("Организация %s отсутствует в списке партнеров;", organizationName);
-            sb.append(errorMessage);
+            errorMessage = String.format("Организация %s отсутствует в списке партнеров", organizationName);
+            errorList.add(errorMessage);
             isOkey = false;
         }
         if(!docNumber.substring(0,4).toLowerCase().contains("dcmt")){
-            errorMessage = String.format("Неверный номер документа – %s, наименование организации - %s;", docNumber, organizationName);
-            sb.append(errorMessage);
+            errorMessage = String.format("Неверный номер документа – %s, наименование организации - %s", docNumber, organizationName);
+            errorList.add(errorMessage);
             isOkey = false;
         }
-        errorMessage = sb.toString();
     }
     
     public BigInteger getNewPrice() {
@@ -73,7 +75,7 @@ public class Calculate {
         this.quantity = quantity;
     }   
     public String getErrorMessage() {
-        return errorMessage;
+        return errorList.stream().collect(Collectors.joining("; "));
     }        
     public void setMaxPrice(BigInteger maxPrice) {
         this.maxPrice = maxPrice;
